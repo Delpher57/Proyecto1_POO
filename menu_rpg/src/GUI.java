@@ -122,13 +122,46 @@ public class GUI {
 		
 
 		
-		// esto detecta los doble click en la lista para mostrar los stats
+		// esto detecta los click en la lista (tienda) para mostrar los stats
 		
 		vendedor.tienda.addMouseListener(new MouseAdapter() {
 		    public void mouseClicked(MouseEvent evt) {
 		    	vendedor.tienda = (JList)evt.getSource();
+		    	
 		        if (evt.getClickCount() == 1) {
 		        	
+		        	if (productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getCategoria().equals("Ataque")) {
+		        		estadisticas.setText("<html>Defensa: " + stats.defensa +
+			    				"<br/>Ataque: "+ stats.ataque + "<font color='00FFFF'> + " + productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getAumentoStat() + "<font color='white'>" +
+			    				"<br/>Velocidad de movimiento: "+ stats.velocidad_movimiento +
+			    				"<br/>Velocidad de ataque: "+ stats.velocidad_ataque + "<font color='00FFFF'> + " + productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getAumentoStat()/10 + "<font color='white'>" +
+			    				"<br/>Mana: "+ stats.mana +
+			    				"</html>");
+				  		}
+			  		
+			  		else if (productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getCategoria().equals("Defensa")) {
+			  			estadisticas.setText("<html>Defensa: " + stats.defensa + "<font color='00FFFF'> + " + productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getAumentoStat() + "<font color='white'>" +
+			    				"<br/>Ataque: "+ stats.ataque +
+			    				"<br/>Velocidad de movimiento: "+ stats.velocidad_movimiento +
+			    				"<br/>Velocidad de ataque: "+ stats.velocidad_ataque +
+			    				"<br/>Mana: "+ stats.mana + "<font color='00FFFF'> + " + productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getAumentoStat()/10 + "<font color='white'>" +
+			    				"</html>");
+				  		}
+			  		else if (productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getCategoria().equals("Velocidad")) {
+			  			estadisticas.setText("<html>Defensa: " + stats.defensa +
+			    				"<br/>Ataque: "+ stats.ataque +
+			    				"<br/>Velocidad de movimiento: "+ stats.velocidad_movimiento + "<font color='00FFFF'> + " + productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getAumentoStat() + "<font color='white'>" +
+			    				"<br/>Velocidad de ataque: "+ stats.velocidad_ataque +
+			    				"<br/>Mana: "+ stats.mana +
+			    				"</html>");
+				  		
+				  		}
+			  		
+			  		else {
+			  			System.out.println("no se leyo nada");}
+		        	
+		        	
+			  			
 		        	descripcion.setText("<html>Nombre: " + productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getNombreArtefacto() + 
 		        			"<br/>Tipo: " + productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getCategoria() + 
 		        			"<br/>Precio: " + productos.arregloArtefactos[vendedor.tienda.getSelectedIndex()].getPrecio()
@@ -139,6 +172,80 @@ public class GUI {
 		        } 
 		    }});
 		
+		
+		
+		
+		
+		
+		// esto detecta los click en el inventario para mostrar los stats
+		
+				stats.inventario.addMouseListener(new MouseAdapter() {
+				    public void mouseClicked(MouseEvent evt) {
+				    	vendedor.tienda = (JList)evt.getSource();
+				        if (evt.getClickCount() == 1) {
+				        	
+				        	int n = 0;
+				        	while (n < productos.numeroArtefactos) {
+					  			
+					  			
+					  			
+					  			
+						  		if (productos.arregloArtefactos[n].getNombreArtefacto().toString().equals(stats.inventario.getSelectedValue().toString())) {
+						  			
+						  			break;
+						  			}
+					  		n++;
+					  		}
+				        	
+				        	if (stats.model_equip.contains(stats.inventario.getSelectedValue())) {
+				        		cambiar_stats();
+				        	}else {
+				        	
+				        	if (productos.arregloArtefactos[n].getCategoria().equals("Ataque")) {
+				        		estadisticas.setText("<html>Defensa: " + stats.defensa +
+					    				"<br/>Ataque: "+ stats.ataque + "<font color='00FFFF'> + " + productos.arregloArtefactos[n].getAumentoStat() + "<font color='white'>" +
+					    				"<br/>Velocidad de movimiento: "+ stats.velocidad_movimiento +
+					    				"<br/>Velocidad de ataque: "+ stats.velocidad_ataque + "<font color='00FFFF'> + " + productos.arregloArtefactos[n].getAumentoStat()/10 + "<font color='white'>" +
+					    				"<br/>Mana: "+ stats.mana +
+					    				"</html>");
+						  		}
+					  		
+					  		else if (productos.arregloArtefactos[n].getCategoria().equals("Defensa")) {
+					  			estadisticas.setText("<html>Defensa: " + stats.defensa + "<font color='00FFFF'> + " + productos.arregloArtefactos[n].getAumentoStat() + "<font color='white'>" +
+					    				"<br/>Ataque: "+ stats.ataque +
+					    				"<br/>Velocidad de movimiento: "+ stats.velocidad_movimiento +
+					    				"<br/>Velocidad de ataque: "+ stats.velocidad_ataque +
+					    				"<br/>Mana: "+ stats.mana + "<font color='00FFFF'> + " + productos.arregloArtefactos[n].getAumentoStat()/10 + "<font color='white'>" +
+					    				"</html>");
+						  		}
+					  		else if (productos.arregloArtefactos[n].getCategoria().equals("Velocidad")) {
+					  			estadisticas.setText("<html>Defensa: " + stats.defensa +
+					    				"<br/>Ataque: "+ stats.ataque +
+					    				"<br/>Velocidad de movimiento: "+ stats.velocidad_movimiento + "<font color='00FFFF'> + " + productos.arregloArtefactos[n].getAumentoStat() + "<font color='white'>" +
+					    				"<br/>Velocidad de ataque: "+ stats.velocidad_ataque +
+					    				"<br/>Mana: "+ stats.mana +
+					    				"</html>");
+						  		
+						  		}
+					  		
+					  		else {
+					  			System.out.println("no se leyo nada");
+					  		}}
+				        	
+				        	
+				        	
+				        	
+				        	
+				        	descripcion.setText("<html>Nombre: " + productos.arregloArtefactos[n].getNombreArtefacto() + 
+				        			"<br/>Tipo: " + productos.arregloArtefactos[n].getCategoria() + 
+				        			"<br/>Precio: " + productos.arregloArtefactos[n].getPrecio()
+				        			+ "<br/>Stats: +" + productos.arregloArtefactos[n].getAumentoStat() +"</html>" );
+				        	
+				        	music.cling();
+		     
+				        } 
+				    }});
+				
 		
 		
 		
